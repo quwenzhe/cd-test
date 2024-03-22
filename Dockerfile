@@ -1,9 +1,9 @@
 FROM openjdk:8
 
-COPY . /app
+ENV CHJ_BUILD_PATH=/workspace/target
 
-WORKDIR /app
+RUN mkdir -p /chj/app && chmod 775 -R /chj
 
-RUN javac HelloWorld.java
+COPY ${CHJ_BUILD_PATH} /chj/app/
 
-CMD ["java", "HelloWorld"]
+CMD java -jar /chj/app/*.jar
